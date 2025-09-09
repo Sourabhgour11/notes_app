@@ -44,8 +44,8 @@ class NoteDetailView extends StatelessWidget {
               const SizedBox(height: 12),
               controller.isEditing.value
                   ? TextField(
-                controller: TextEditingController(text: controller.title.value),
-                onChanged: (v) => controller.title.value = v,
+                controller: controller.titleController,
+                onChanged: (v) => controller.title.value = controller.titleController.text,
                 decoration: const InputDecoration(labelText: 'Title'),
               )
                   : Text(n.title, style: Theme.of(context).textTheme.headlineSmall),
@@ -53,8 +53,8 @@ class NoteDetailView extends StatelessWidget {
               Expanded(
                 child: controller.isEditing.value
                     ? TextField(
-                  controller: TextEditingController(text: controller.description.value),
-                  onChanged: (v) => controller.description.value = v,
+                  controller: controller.descriptionController,
+                  onChanged: (v) => controller.description.value = controller.descriptionController.text,
                   decoration: const InputDecoration(labelText: 'Description'),
                   maxLines: null,
                   expands: true,

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../../../data/models/note.dart';
 import '../../../data/repositories/note_repository.dart';
@@ -11,6 +12,9 @@ class NoteDetailController extends GetxController {
   final title = ''.obs;
   final description = ''.obs;
 
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
+
   @override
   void onInit() {
     super.onInit();
@@ -22,8 +26,8 @@ class NoteDetailController extends GetxController {
     final n = repo.getById(noteId);
     note.value = n;
     if (n != null) {
-      title.value = n.title;
-      description.value = n.description;
+      titleController.text = n.title;
+      descriptionController.text = n.description;
     }
   }
 
@@ -35,8 +39,8 @@ class NoteDetailController extends GetxController {
     final n = note.value;
     if (n == null) return;
     final updated = n.copyWith(
-      title: title.value.trim(),
-      description: description.value.trim(),
+      title: titleController.text.trim(),
+      description: descriptionController.text.trim(),
     );
     await repo.update(updated);
     load();
